@@ -1,4 +1,14 @@
 ### 1. init
 
-  npm install -g create-react-app
-  create-react-app react-fullstack
+  npm init
+  npm install
+
+  npm install -g live-server # 服务, 使用live-server启动, 端口8080
+
+  #npm install redux --save
+  #npm install antd-mobile@next --save
+  #npm install axios --save
+  #npm install cookie-parser --save
+  #npm install --save-dev webpack-cli
+
+  webapck4.x后, 相关命令移到webpack-cli
