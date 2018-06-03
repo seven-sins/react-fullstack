@@ -1,25 +1,27 @@
 import React from 'react';
 import Logo from '../../component/logo/logo';
-import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
+import '../../less/common.less';
+import './register.less';
 
 class Register extends React.Component{
     constructor(props){
         super(props);
-        this.register = this.register.bind(this);
+        this.login = this.login.bind(this);
     }
-    register(){
-        this.props.history.push('/register');
+    login(){
+        this.props.history.push('/login');
     }
     render(){
         return (
             <div>
                 <Logo></Logo>
-                <h2>注册页</h2>
-                <WingBlank>
-                    <Button type='primary'>登录</Button>
-                    <WhiteSpace/>
-                    <Button onClick={this.register} type='primary'>注册</Button>
-                </WingBlank>
+                <h2 className='register-title'>注册</h2>
+                <ul className='register-container'>
+                    <li>用户名:</li>
+                    <li><input type='text' /></li>
+                    <li>密码:</li>
+                    <li><input type='text' /></li>
+                </ul>
             </div>
         )
     }
