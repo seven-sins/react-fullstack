@@ -1,8 +1,12 @@
 const path=require('path');
+//
+const glob=require('glob');
 // 压缩插件
 const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
 // 
 const htmlPlugin=require('html-webpack-plugin');
+//
+const PurifyCSSPlugin=require('purifycss-webpack');
 
 module.exports={
     // 1.入口
@@ -19,7 +23,7 @@ module.exports={
         rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.(png|jpg|gif)$/,
@@ -38,6 +42,7 @@ module.exports={
                 test: /\.(htm|html)$/i,
                 use: ['html-withimg-loader']
             },
+            // less
             {
                 test: /\.less$/,
                 use: [
@@ -49,8 +54,21 @@ module.exports={
                     },
                     {
                         loader: 'less-loader'
+                    },
+                    {
+                        loader: 'postcss-loader'
                     }
                 ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015', 'react']
+                    }
+                },
+                exclude: /node_modules/
             }
         ]
     },
@@ -67,6 +85,10 @@ module.exports={
             // 禁用缓存
             hash: true,
             template: './src/index.html'
+        }),
+        // 移除未使用的css
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, './src/*.html'))
         })
     ],
     // 5.开发服务
