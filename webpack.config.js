@@ -9,6 +9,8 @@ const htmlPlugin=require('html-webpack-plugin');
 const PurifyCSSPlugin=require('purifycss-webpack');
 
 module.exports={
+    // 调试
+    devtool: 'source-map',
     // 1.入口
     entry: {
         entry: './src/index.js'
@@ -63,10 +65,7 @@ module.exports={
             {
                 test: /\.(js|jsx)$/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015', 'react']
-                    }
+                    loader: 'babel-loader'
                 },
                 exclude: /node_modules/
             }

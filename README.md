@@ -39,5 +39,13 @@
   
   npm install --save babel-core 
   npm install --save babel-loader 
-  npm install --save babel-preset-es2015 
+  npm install --save babel-preset-env # babel-preset-2015已过时
   npm install --save babel-preset-react
+
+  webpack.config.js配置loader
+  .babelrc配置转换
+
+
+
+
+  
