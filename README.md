@@ -1,6 +1,6 @@
 ### 1. init
 
-  npm init
+  npm init -y
   npm install
 
   npm run server

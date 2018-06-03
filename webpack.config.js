@@ -10,7 +10,7 @@ const PurifyCSSPlugin=require('purifycss-webpack');
 
 module.exports={
     // 调试
-    devtool: 'source-map',
+    // devtool: 'source-map',
     // 1.入口
     entry: {
         entry: './src/index.js'
@@ -74,7 +74,7 @@ module.exports={
     // 4.插件
     plugins: [
         // 压缩
-        // new UglifyJsPlugin(),
+        new UglifyJsPlugin(),
         // html
         new htmlPlugin({
             minify: {
@@ -95,6 +95,8 @@ module.exports={
         contentBase: path.resolve(__dirname, 'dist'),
         host: '127.0.0.1',
         compress: true,
-        port: 80
+        port: 8080,
+        // 解决刷新404的问题
+        historyApiFallback: true
     }
 }

@@ -12,7 +12,7 @@ axios.interceptors.request.use( config => {
 /**
  * 拦截响应
  */
-asios.interceptors.response.use( config=> {
+axios.interceptors.response.use( config=> {
     Toast.hide();
     return config;
 })

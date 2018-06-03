@@ -1,5 +1,30 @@
-import css from './less/index.css';
-import less from './less/index.less';
+import React from 'react';
+import ReactDom from 'react-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Redirect, Switch, Link } from 'react-router-dom';
 
-const text = 'hello world';
-document.getElementById("root").innerHTML = text;
+import Login from './container/login/login';
+import Register from './container/register/register';
+import reducers from './reducer';
+import './config'
+
+const store = createStore(reducers, compose(
+	applyMiddleware(thunk),
+	window.devToolsExtension?window.devToolsExtension():f=>f
+))
+
+ReactDom.render(
+    (
+    <Provider store={store} >
+        <BrowserRouter>
+            <div>
+                <Link to='/login'>登录</Link>
+                <Route path='/login' component={Login}></Route>
+                <Route path='/register' component={Register}></Route>
+            </div>
+        </BrowserRouter>
+    </Provider>),
+    document.getElementById("root")
+);
