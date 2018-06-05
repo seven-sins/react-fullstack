@@ -35,7 +35,7 @@ export function register({username, password, repeatpassword, type}){
     }
     //
     return dispatch => {
-        axios.post('/auth/register', {username, password, type})
+        axios.post('http://www.hiya.com:777/api/user/create', {username, password, type})
             .then(res => {
                 if(res.status === 200){
                     dispatch(registerSuccess({username, password, type}));

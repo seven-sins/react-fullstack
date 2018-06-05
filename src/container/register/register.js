@@ -18,7 +18,7 @@ class Register extends React.Component{
             username: '',
             password: '',
             repeatpassword: '',
-            type: "admin"
+            type: "1" // 1. 管理员, 2. 普通用户
         }
     }
     login(){
@@ -47,12 +47,12 @@ class Register extends React.Component{
                     <WhiteSpace />
                     <InputItem onChange={v=>this.handleChange('repeatpassword', v)}>确认密码</InputItem>
                     <WhiteSpace />
-                    <RadioItem checked={this.state.type=='admin'} onChange={()=>this.handleChange('type', 'admin')}>
-                        admin
+                    <RadioItem checked={this.state.type=='1'} onChange={()=>this.handleChange('type', '1')}>
+                        管理员
                     </RadioItem>
                     <WhiteSpace />
-                    <RadioItem checked={this.state.type=='normal'} onChange={()=>this.handleChange('type', 'normal')}>
-                        normal
+                    <RadioItem checked={this.state.type=='2'} onChange={()=>this.handleChange('type', '2')}>
+                        普通用户
                     </RadioItem>
                     <WhiteSpace />
                     <Button type="primary" onClick={this.handleRegister}>注册</Button>
