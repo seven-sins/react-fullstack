@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
 import localStore from 'store';
-import { modal } from 'antd-mobile';
 
 const domain = 'http://127.0.0.1:8080';
 /**
@@ -32,10 +31,3 @@ axios.interceptors.response.use( config => {
     // 不将错误信息返回到then
     return new Promise(() => {}); 
 })
-
-/**
- * 提示信息
- */
-export function alert(message) {
-    Toast.info(message, 2);
-}
