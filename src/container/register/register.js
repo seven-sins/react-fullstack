@@ -1,9 +1,10 @@
 import React from 'react';
-import { List, InputItem, WhiteSpace, WingBlank, Button, Radio } from 'antd-mobile';
+import { List, InputItem, WhiteSpace, WingBlank, Button, Radio, Toast } from 'antd-mobile';
 import { connect } from 'react-redux';
 
 import { register } from '../../redux/user.redux';
 import Logo from '../../component/logo/logo';
+import '../../less/common.less';
 import './register.less';
 
 @connect(
@@ -18,7 +19,7 @@ class Register extends React.Component{
             username: '',
             password: '',
             repeatpassword: '',
-            type: "1" // 1. 管理员, 2. 普通用户
+            userType: "1" // 1. 管理员, 2. 普通用户
         }
     }
     login(){
@@ -30,7 +31,6 @@ class Register extends React.Component{
         })
     }
     handleRegister = () => {
-        // console.log(this.state);
         this.props.register(this.state);
     }
     render(){
@@ -38,8 +38,10 @@ class Register extends React.Component{
         return (
             <div>
                 <Logo></Logo>
-                {this.props.msg?<p className="error-msg">{this.props.msg}</p>:null}
                 <div className='register-title'>注册</div>
+                <div className='error-info'>
+                    {this.props.msg?<p className="error-msg">{this.props.msg}</p>:null}
+                </div>
                 <List>
                     <InputItem onChange={v=>this.handleChange('username', v)}>用户</InputItem>
                     <WhiteSpace />
@@ -47,11 +49,11 @@ class Register extends React.Component{
                     <WhiteSpace />
                     <InputItem onChange={v=>this.handleChange('repeatpassword', v)}>确认密码</InputItem>
                     <WhiteSpace />
-                    <RadioItem checked={this.state.type=='1'} onChange={()=>this.handleChange('type', '1')}>
+                    <RadioItem checked={this.state.userType=='1'} onChange={()=>this.handleChange('userType', '1')}>
                         管理员
                     </RadioItem>
                     <WhiteSpace />
-                    <RadioItem checked={this.state.type=='2'} onChange={()=>this.handleChange('type', '2')}>
+                    <RadioItem checked={this.state.userType=='2'} onChange={()=>this.handleChange('userType', '2')}>
                         普通用户
                     </RadioItem>
                     <WhiteSpace />

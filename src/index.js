@@ -20,7 +20,6 @@ ReactDom.render(
     <Provider store={store} >
         <BrowserRouter>
             <div>
-                <Link to="/login">toLogin</Link>
                 <Route path='/login' component={Login}></Route>
                 <Route path='/register' component={Register}></Route>
             </div>

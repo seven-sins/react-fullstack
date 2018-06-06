@@ -1,10 +1,12 @@
 import axios from 'axios';
+import localStore from 'store';
+import { Toast } from 'antd-mobile';
 // reducer
 const initState = {
     msg: '',
     username: '',
     password: '',
-    type: ''
+    userType: ''
 }
 
 export function user(state=initState, action){
@@ -26,7 +28,10 @@ function registerSuccess(data){
     return { type: 'success', payload: data };
 }
 
-export function register({username, password, repeatpassword, type}){
+/**
+ * @param {*注册事件} param
+ */
+export function register({username, password, repeatpassword, userType}){
     if(!username || !password){
         return errorMsg('用户名和密码不能为空');
     }
@@ -35,14 +40,34 @@ export function register({username, password, repeatpassword, type}){
     }
     //
     return dispatch => {
-        axios.post('http://www.hiya.com:777/api/user/create', {username, password, type})
+        axios.post('/api/user/create', {username, password, userType})
             .then(res => {
-                if(res.status === 200){
-                    dispatch(registerSuccess({username, password, type}));
-                }else{
-                    dispatch(errorMsg(res.data.message));
-                }
+                Toast.success(res.data.message, 2);
+                //dispatch(registerSuccess({username, password, userType}));
+                //if(res.status === 200){
+                //    dispatch(registerSuccess({username, password, type}));
+                //}else{
+                //    dispatch(errorMsg(res.data.message));
+                //}
             })
     }
-    
+}
+
+/**
+ * @param {*登录事件处理} param
+ * @param {*} callback 
+ */
+export function login({username, password}, callback){
+    if(!username || !password){
+        return errorMsg('用户名和密码不能为空');
+    }
+    //
+    return dispatch => {
+        axios.post('/auth/login', {username, password})
+            .then(res => {
+                localStore.remove('token');
+                localStore.set('token', res.data.data);
+                callback.call();
+            })
+    }
 }
